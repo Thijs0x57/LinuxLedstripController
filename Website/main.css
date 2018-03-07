@@ -1,0 +1,66 @@
+html
+{
+	padding: 0px;
+	margin: 0px;
+	background-color: #a3c6ff;
+}
+
+body
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+p
+{
+	margin: 0;
+	padding: 0;
+}
+
+.header
+{
+	margin: 0px;
+	padding-left: 20%;
+	padding-right: 20%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #5b9aff;
+	width: 100%;
+	min-height: 20px;
+}
+
+.photoheader
+{
+	background-color: red;
+	padding: 0px;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-image: url("led-strip.jpg");
+	background-repeat: no-repeat;
+	width: max-width;
+	height: 400px;
+	background-size: cover;
+}
+
+.main
+{
+	background-color: white;
+	padding: 10px;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	min-height: 500px;
+}
+
+#main-title
+{
+	padding: 10px;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: #5b9aff;
+}
