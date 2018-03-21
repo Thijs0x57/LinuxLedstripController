@@ -3,6 +3,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var port = 3000;
 
+var color               = 255;
+var brightness          = 255;
+var pattern             = "static";
+var mode_brightness     = 255;
+var mode_start_time     = "YYYY-MM-DDThh:mm:ss";
+var mode_end_time       = "YYYY-MM-DDThh:mm:ss";
+
 var router = express();
 
 var inputs = [{ pin: '11', gpio: '17', value: 1 },
@@ -12,29 +19,37 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
   router.use(bodyParser.json());
 
 
-// Express route for incoming requests for a customer name
-router.get('/inputs/:id', function(req, res) {
-  res.status(200).send(inputs[req.params.id]);
+/*
+*Get request to get the status of the LED strip.
+*
+*/
+router.get('/status', function(req, res) {
+    res.body.color = color;
+    res.body.brightness = brightness;
+    res.body.pattern = pattern;
+    res.body.mode_brightness = mode_brightness;
+    res.body.mode_start_time = mode_start_time;
+    res.body.mode_end_time = mode_end_time;
 }); 
 
 router.post('/name', function(req, res) {
-  var name = req.body.name;
-  console.log(name);
-  res.status(200).send(name);
+    var name = req.body.name;
+    console.log(name);
+    res.status(200).send(name);
 });
 
 // Express route for any other unrecognised incoming requests
 router.get('*', function(req, res) {
-  res.status(404).send('Unrecognised API call');
+    res.status(404).send('Unrecognised API call');
 });
 
 // Express route to handle errors
 router.use(function(err, req, res, next) {
-  if (req.xhr) {
-    res.status(500).send('Oops, Something went wrong!');
-  } else {
-    next(err);
-  }
+    if (req.xhr) {
+        res.status(500).send('Oops, Something went wrong!');
+    } else {
+        next(err);
+    }
 });
 
 //Finally, start the server application, listening on the given port:
