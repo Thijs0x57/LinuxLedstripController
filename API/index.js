@@ -34,7 +34,19 @@ router.get('/status', function (req, res) {
           "mode_end_time" : mode_end_time
       });
       res.end(json);
-}); 
+});
+
+router.get('/patterns', function (req, res) {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    var json = JSON.stringify({
+        "patterns": [
+            "static",
+            "static_wave",
+            "moving_wave"
+        ]
+    });
+    res.end(json);
+});
 
 router.post('/color', function(req, res) {
     var color = req.body.color;
