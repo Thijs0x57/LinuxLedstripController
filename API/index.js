@@ -48,6 +48,14 @@ router.post('/brightness', function (req, res) {
     res.status(204).send();
 });
 
+router.post('/brightness/mode', function (req, res) {
+    var mode_brightness = req.body.mode_brightness;
+    console.log(mode_brightness);
+    res.status(204).send();
+});
+
+
+
 // Express route for any other unrecognised incoming requests
 router.get('*', function(req, res) {
     res.status(404).send('Unrecognised API call');
