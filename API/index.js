@@ -54,7 +54,13 @@ router.post('/brightness/mode', function (req, res) {
     res.status(204).send();
 });
 
-
+router.post('/mode/time', function (req, res) {
+    var mode_start_time = req.body.mode_start_time;
+    var mode_end_time = req.body.mode_end_time;
+    console.log(mode_start_time);
+    console.log(mode_end_time);
+    res.status(204).send();
+});
 
 // Express route for any other unrecognised incoming requests
 router.get('*', function(req, res) {
