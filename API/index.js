@@ -42,6 +42,12 @@ router.post('/color', function(req, res) {
     res.status(204).send();
 });
 
+router.post('/brightness', function (req, res) {
+    var brightness = req.body.brightness;
+    console.log(brightness);
+    res.status(204).send();
+});
+
 // Express route for any other unrecognised incoming requests
 router.get('*', function(req, res) {
     res.status(404).send('Unrecognised API call');
