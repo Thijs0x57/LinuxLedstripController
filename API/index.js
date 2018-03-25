@@ -23,20 +23,18 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 *Get request to get the status of the LED strip.
 *
 */
-router.get('/status', function(req, res) {
-    res.body.color = color;
-    res.body.brightness = brightness;
-    res.body.pattern = pattern;
-    res.body.mode_brightness = mode_brightness;
-    res.body.mode_start_time = mode_start_time;
-    res.body.mode_end_time = mode_end_time;
+router.get('/status', function (req, res) {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      var json = JSON.stringify({
+          "color" : color,
+          "brightness": brightness,
+          "pattern": pattern,
+          "mode_brightness": mode_brightness,
+          "mode_start_time": mode_start_time,
+          "mode_end_time" : mode_end_time
+      });
+      res.end(json);
 }); 
-
-router.post('/name', function(req, res) {
-    var name = req.body.name;
-    console.log(name);
-    res.status(200).send(name);
-});
 
 // Express route for any other unrecognised incoming requests
 router.get('*', function(req, res) {
