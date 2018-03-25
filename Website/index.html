@@ -5,6 +5,7 @@
 		<link rel="icon" type="image/png" href="favicon.png" sizes="256x256">
 		<title>RGB Controller</title>
         <script src="jquery-3.3.1.min.js"></script>
+        <script src="client.js"></script>
 	</head>
 	
 	<body>
@@ -30,7 +31,7 @@
             
 
 			<h2>Change pattern</h2>
-            <form>
+            <form id="patternForm">
 				<select>
                     <option value="test">Test</option>
                     <option value="test2">Test2</option>
@@ -40,20 +41,17 @@
 			
 			<h2>Change brightness</h2>
 			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
-			<form>
+			<form id="brightnessForm">
 				<input type="text" name="brightnessInput">
 				<input type="submit" value="submit">
 			</form>
 			
 			<h2>Change mode brightness</h2>
 			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
-			<form>
+			<form id="brightnessModeInputForm">
 				<input type="text" name="brightnessModeInput">
 				<input type="submit" value="submit">
 			</form>
-			
 		</div>
-		
-
 	</body>
 </html>
