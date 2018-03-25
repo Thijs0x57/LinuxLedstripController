@@ -63,8 +63,34 @@ router.post('/mode/time', function (req, res) {
 });
 
 // Express route for any other unrecognised incoming requests
-router.get('*', function(req, res) {
-    res.status(404).send('Unrecognised API call');
+router.get('*', function (req, res) {
+    console.log("The resource you are trying to send a GET request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a GET request to does not exist or does not accept the request method.');
+});
+
+router.post('*', function (req, res) {
+    console.log("The resource you are trying to send a POST request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a POST request to does not exist or does not accept the request method.');
+});
+
+router.put('*', function (req, res) {
+    console.log("The resource you are trying to send a PUT request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a PUT request to does not exist or does not accept the request method.');
+});
+
+router.patch('*', function (req, res) {
+    console.log("The resource you are trying to send a PATCH request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a PATCH request to does not exist or does not accept the request method.');
+});
+
+router.delete('*', function (req, res) {
+    console.log("The resource you are trying to send a DELETE request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a DELETE request to does not exist or does not accept the request method.');
+});
+
+router.copy('*', function (req, res) {
+    console.log("The resource you are trying to send a COPY request to does not exist or does not accept the request method.");
+    res.status(404).send('The resource you are trying to send a COPY request to does not exist or does not accept the request method.');
 });
 
 // Express route to handle errors
