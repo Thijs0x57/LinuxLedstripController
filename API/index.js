@@ -7,8 +7,8 @@ var color               = 255;
 var brightness          = 255;
 var pattern             = "static";
 var mode_brightness     = 255;
-var mode_start_time     = "YYYY-MM-DDThh:mm:ss";
-var mode_end_time       = "YYYY-MM-DDThh:mm:ss";
+var mode_start_time     = "hh:mm";
+var mode_end_time       = "hh:mm";
 
 var router = express();
 
