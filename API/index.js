@@ -24,25 +24,27 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 *
 */
 router.get('/status', function (req, res) {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      var json = JSON.stringify({
-          "color" : color,
-          "brightness": brightness,
-          "pattern": pattern,
-          "mode_brightness": mode_brightness,
-          "mode_start_time": mode_start_time,
-          "mode_end_time" : mode_end_time
-      });
-      res.end(json);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    console.log("GET status");
+    var json = JSON.stringify({
+        "color" : color,
+        "brightness": brightness,
+        "pattern": pattern,
+        "mode_brightness": mode_brightness,
+        "mode_start_time": mode_start_time,
+        "mode_end_time" : mode_end_time
+    });
+    res.end(json);
 });
 
 router.get('/patterns', function (req, res) {
     res.writeHead(200, { "Content-Type": "application/json" });
+    console.log("GET patterns");
     var json = JSON.stringify({
         "patterns": [
-            "static",
-            "static_wave",
-            "moving_wave"
+            { "name": "static", "display_name": "Static" },
+            { "name": "static_wave", "display_name": "Static rainbow" },
+            { "name": "moving_wave", "display_name": "Moving rainbow" }
         ]
     });
     res.end(json);
