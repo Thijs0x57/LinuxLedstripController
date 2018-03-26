@@ -126,6 +126,16 @@ function hexToRgb(hex) {
     } : null;
 }
 
+
+function insertCurrentColor(r, g, b){
+	var sql = 'INSERT INTO TABLE_NAME (red, green, blue) VALUES (' + r + ',' + g + ',' + b + ')';
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log('Inserted RGB: ' + r + ', ' + g + ', ' + b);
+	});
+
+}
+
 // Connects to the database
 con.connect(function(err) {
   if (err) throw err;
