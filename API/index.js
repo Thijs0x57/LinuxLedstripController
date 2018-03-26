@@ -18,6 +18,14 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
   router.use(express['static'](__dirname ));
   router.use(bodyParser.json());
 
+var mysql = require('mysql');
+var con = mysql.createConnection({
+  host: "localhost",				// Not ready yet
+  user: "yourusername",				// Not ready yet
+  password: "yourpassword",			// Not ready yet
+  database: "mydb"					// Not ready yet
+});
+
 
 /*
 *Get request to get the status of the LED strip.
@@ -117,6 +125,12 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 }
+
+// Connects to the database
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
 
 //Finally, start the server application, listening on the given port:
 router.listen(port);
