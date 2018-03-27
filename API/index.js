@@ -3,8 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var port = 3000;
 
-var color               = 255;
-var brightness          = 255;
+var color               = "#4286f4";
+var brightness          = 100;
 var pattern             = "static";
 var mode_brightness     = 255;
 var mode_start_time     = "hh:mm";
@@ -32,17 +32,31 @@ var con = mysql.createConnection({
 *
 */
 router.get('/status', function (req, res) {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      var json = JSON.stringify({
-          "color" : color,
-          "brightness": brightness,
-          "pattern": pattern,
-          "mode_brightness": mode_brightness,
-          "mode_start_time": mode_start_time,
-          "mode_end_time" : mode_end_time
-      });
-      res.end(json);
-}); 
+    res.writeHead(200, { "Content-Type": "application/json" });
+    console.log("GET status");
+    var json = JSON.stringify({
+        "color" : color,
+        "brightness": brightness,
+        "pattern": pattern,
+        "mode_brightness": mode_brightness,
+        "mode_start_time": mode_start_time,
+        "mode_end_time" : mode_end_time
+    });
+    res.end(json);
+});
+
+router.get('/patterns', function (req, res) {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    console.log("GET patterns");
+    var json = JSON.stringify({
+        "patterns": [
+            { "name": "static", "display_name": "Static" },
+            { "name": "static_wave", "display_name": "Static rainbow" },
+            { "name": "moving_wave", "display_name": "Moving rainbow" }
+        ]
+    });
+    res.end(json);
+});
 
 router.post('/color', function(req, res) {
     var color = req.body.color;
@@ -67,6 +81,12 @@ router.post('/mode/time', function (req, res) {
     var mode_end_time = req.body.mode_end_time;
     console.log(mode_start_time);
     console.log(mode_end_time);
+    res.status(204).send();
+});
+
+router.post('/pattern', function (req, res) {
+    var pattern = req.body.pattern;
+    console.log(pattern);
     res.status(204).send();
 });
 
