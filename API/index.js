@@ -10,6 +10,8 @@ var mode_brightness     = 55;
 var mode_start_time     = "hh:mm";
 var mode_end_time       = "hh:mm";
 
+var databaseError = 0;
+
 var router = express();
 
 var inputs = [{ pin: '11', gpio: '17', value: 1 },
@@ -191,51 +193,85 @@ function hexToRgb() {
 
 function SetColor(hex){
 	color = hex;
-	var sql = 'UPDATE values SET color = ' + hex;
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log('UPDATED HEX: ' + hex);
-	});
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'UPDATE values SET color = ' + hex;
+		con.query(sql, function (err, result) {
+			if (err){
+				databaseError = 1;
+			}
+			console.log('UPDATED HEX: ' + hex);
+		});
+	}
 	SetCurrentColor();
 }
 
 function SetBrightness(brightnessValue){
 	brightness = brightnessValue;
-	var sql = 'UPDATE values SET brightness = ' + brightness;
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log('UPDATED brightness: ' + brightness);
-	});
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'UPDATE values SET brightness = ' + brightness;
+		con.query(sql, function (err, result) {
+			if (err){
+				databaseError = 1;
+			}
+			console.log('UPDATED brightness: ' + brightness);
+		});
 	SetCurrentColor();
 }
 
 function SetPattern(patternValue){
 	pattern = patternValue;
-	var sql = 'UPDATE values SET pattern = ' + pattern;
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log('UPDATED pattern: ' + pattern);
-	});
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'UPDATE values SET pattern = ' + pattern;
+		con.query(sql, function (err, result) {
+			if (err){
+				databaseError = 1;
+			}
+			console.log('UPDATED pattern: ' + pattern);
+		});
+	}
 }
 
 function SetModeTime(mode_start_timeValue, mode_end_timeValue){
 	mode_start_time = mode_start_timeValue;
 	mode_end_time = mode_end_timeValue;
-	var sql = 'UPDATE values SET startTime = ' + mode_start_time + ', endTime = ' + mode_end_time;
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log('UPDATED mode_start_time: ' + mode_start_time);
-		console.log('UPDATED mode_end_time: ' + mode_end_time);
-	});
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'UPDATE values SET startTime = ' + mode_start_time + ', endTime = ' + mode_end_time;
+		con.query(sql, function (err, result) {
+			if (err){
+				databaseError = 1;
+			}
+			console.log('UPDATED mode_start_time: ' + mode_start_time);
+			console.log('UPDATED mode_end_time: ' + mode_end_time);
+		});
+	}
 }
 
 function SetModeBrightness(mode_brightnessValue){
 	mode_brightness = mode_brightnessValue;
-	var sql = 'UPDATE values SET brightness = ' + mode_brightness;
-	con.query(sql, function (err, result) {
-		if (err) throw err;
-		console.log('Updated mode_brightness: ' + mode_brightness);
-	});
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'UPDATE values SET brightness = ' + mode_brightness;
+		con.query(sql, function (err, result) {
+			if (err){ 
+				databaseError = 1; 
+			}
+			console.log('Updated mode_brightness: ' + mode_brightness);
+		});
+	}
 }
 
 function CheckAlternativeMode(){
@@ -253,10 +289,18 @@ function CheckAlternativeMode(){
 }
 
 // Connects to the database
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+function ConnectToDatabase(){
+	con.connect(function(err) {
+	  if (err){
+		databaseError = 1;
+	  }else{
+		databaseError = 0;
+		console.log("Connected!");
+	  }
+	});
+}
+
+ConnectToDatabase();
 
 var rule = new schedule.RecurrenceRule();
 rule.minute = 5;
