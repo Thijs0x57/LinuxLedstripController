@@ -58,6 +58,11 @@ p
 	min-height: 500px;
 }
 
+.error
+{
+	display: none;
+}
+
 #main-title
 {
 	padding: 10px;

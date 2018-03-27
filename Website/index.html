@@ -28,15 +28,17 @@
 			<p>Time active: </p>
 			
 			<h2>Change colour</h2>
-            
+            <p class="error" id="colorError">-</p>
 
 			<h2>Change pattern</h2>
+            <p class="error" id="patternError">-</p>
             <form id="patternForm">
 				<select id="patternDropdown"></select>
 				<input type="submit" value="submit">
 			</form>
 			
 			<h2>Change brightness</h2>
+            <p class="error" id="brightnessError">-</p>
 			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
 			<form id="brightnessForm">
 				<input type="text" name="brightnessInput">
@@ -44,6 +46,7 @@
 			</form>
 			
 			<h2>Change mode brightness</h2>
+            <p class="error" id="brightnessModeError">-</p>
 			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
 			<form id="brightnessModeInputForm">
 				<input type="text" name="brightnessModeInput">
