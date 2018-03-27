@@ -131,9 +131,26 @@ function SetCurrentColor() {
 	var colorValue = hexToRgb();
 
 	//for common cathode RGB LED 0 is fully off, and 255 is fully on
-	var redRGB = colorValue.r;
-	var greenRGB = colorValue.g;
-    var blueRGB = colorValue.b;
+	var redRGB = colorValue.r * (brightness/100);
+	var greenRGB = colorValue.g * (brightness/100);
+    var blueRGB = colorValue.b * (brightness/100);
+
+	//set RED LED to specified value
+	ledRed.pwmWrite(redRGB);
+	//set GREEN LED to specified value
+	ledGreen.pwmWrite(greenRGB);
+	//set BLUE LED to specified value
+	ledBlue.pwmWrite(blueRGB);
+};
+
+function SetModeColor() {
+	//Get the HEX value
+	var colorValue = hexToRgb();
+
+	//for common cathode RGB LED 0 is fully off, and 255 is fully on
+	var redRGB = colorValue.r * (mode_brightness/100);
+	var greenRGB = colorValue.g * (mode_brightness/100);
+    var blueRGB = colorValue.b * (mode_brightness/100);
 
 	//set RED LED to specified value
 	ledRed.pwmWrite(redRGB);
@@ -154,51 +171,53 @@ function hexToRgb() {
 }
 
 function SetColor(hex){
+	color = hex;
 	var sql = 'UPDATE values SET color = ' + hex;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED HEX: ' + hex);
 	});
-	this.color = hex;
 	SetCurrentColor();
 }
 
-function SetBrightness(brightness){
+function SetBrightness(brightnessValue){
+	brightness = brightnessValue;
 	var sql = 'UPDATE values SET brightness = ' + brightness;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED brightness: ' + brightness);
 	});
-	this.brightness = brightness;
+	SetCurrentColor();
 }
 
-function SetPattern(pattern){
+function SetPattern(patternValue){
+	pattern = patternValue;
 	var sql = 'UPDATE values SET pattern = ' + pattern;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED pattern: ' + pattern);
 	});
-	this.pattern = pattern;
 }
 
-function SetModeTime(mode_start_time, mode_end_time){
+function SetModeTime(mode_start_timeValue, mode_end_timeValue){
+	mode_start_time = mode_start_timeValue;
+	mode_end_time = mode_end_timeValue;
 	var sql = 'UPDATE values SET startTime = ' + mode_start_time + ', endTime = ' + mode_end_time;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED mode_start_time: ' + mode_start_time);
 		console.log('UPDATED mode_end_time: ' + mode_end_time);
 	});
-	this.mode_start_time = mode_start_time;
-	this.mode_end_time = mode_end_time;
 }
 
-function SetModeBrightness(mode_brightness){
+function SetModeBrightness(mode_brightnessValue){
+	mode_brightness = mode_brightnessValue;
 	var sql = 'UPDATE values SET brightness = ' + mode_brightness;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('Updated mode_brightness: ' + mode_brightness);
 	});
-	this.mode_brightness = mode_brightness;
+	SetModeColor();
 }
 
 function CheckAlternativeMode(){
