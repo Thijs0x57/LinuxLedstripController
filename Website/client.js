@@ -107,6 +107,12 @@ $(function () {
     });
 });
 
+/*
+*-------------------------------------------------------------------------------------------
+*Supporting functions
+*
+*/
+
 //Elementname must be given with their .class or #id.
 function showError(elementName, message)
 {
@@ -135,7 +141,11 @@ function showSuccess(elementName, message)
 
 function getStatus()
 {
-    $.getJSON("/status", function (result) {
+    var result;
+    $.getJSON("/status", function (r) {
+        result = r;
+    })
+    .done(function () {
 
         $("#color").text(result.color);
         $("#pattern").text(result.pattern);
@@ -143,17 +153,27 @@ function getStatus()
         $("#saving_brightness").text(result.mode_brightness);
         $("#start_time").text(result.mode_start_time);
         $("#end_time").text(result.mode_end_time);
+    })
+    .fail(function () {
+        showError("#statusError", "An errror occurred retrieving the status. Please reload the page if this error keeps occurring.");
     });
 }
 
 function getPatterns()
 {
-    $.getJSON("/patterns", function (result) {
+    var result;
+    $.getJSON("/patterns", function (r) {
+        result = r;
+    })
+    .done(function () {
 
         var $dropdown = $("#patternDropdown");
 
         $.each(result.patterns, function (index, value) {
             $dropdown.append($("<option />").val(value.name).text(value.display_name));
         });
+    })
+    .fail(function () {
+        showError("#patternError", "An errror occurred retrieving the patterns. Please reload the page.");
     });
 }
