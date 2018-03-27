@@ -33,6 +33,7 @@ $(function () {
         })
         .done(function () {
             showSuccess("#patternError", "The pattern was successfully saved");
+            $("#pattern").text($("#patternDropdown option[value=" + pattern + "]").text());
         })
         .fail(function (msg) {
             showError("#patternError", "Something went wrong, please try again.");
@@ -64,6 +65,7 @@ $(function () {
             .done(function () {
                 showSuccess("#brightnessError", "The brightness was successfully saved");
                 $("#brightnessForm").find('input[name="brightnessInput"]').val("");
+                $("#brightness").text(brightness);
             })
             .fail(function (msg) {
                 showError("#brightnessError", "Something went wrong, please try again.");
@@ -96,6 +98,7 @@ $(function () {
             .done(function () {
                 showSuccess("#brightnessModeError", "The brightness was successfully saved");
                 $("#brightnessModeForm").find('input[name="brightnessModeInput"]').val("");
+                $("#saving_brightness").text(brightness);
             })
             .fail(function (msg) {
                 showError("#brightnessModeError", "Something went wrong, please try again.");
