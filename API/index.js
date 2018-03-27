@@ -4,9 +4,9 @@ var bodyParser = require('body-parser');
 var port = 3000;
 
 var color               = 255;
-var brightness          = 255;
+var brightness          = 100;
 var pattern             = "static";
-var mode_brightness     = 255;
+var mode_brightness     = 55;
 var mode_start_time     = "hh:mm";
 var mode_end_time       = "hh:mm";
 
@@ -205,6 +205,20 @@ function SetModeBrightness(mode_brightness){
 		console.log('Updated mode_brightness: ' + mode_brightness);
 		this.mode_brightness = mode_brightness;
 	});
+}
+
+function CheckAlternativeMode(){
+	var date = new Date();
+	var current_hour = date.getHours();
+	var current_minute = date.getMinutes();
+	var current_minutes = ((current_hour * 60) + current_minute);
+	var mode_start_minutes = ((parseInt(mode_start_time.substring(0,2)) * 60) + parseInt(mode_start_time.substring(3,5)));
+	var mode_end_minutes = ((parseInt(mode_end_time.substring(0,2)) * 60) + parseInt(mode_end_time.substring(3,5)));
+	if(current_minutes >= mode_start_minutes){
+		// Set the mode_brightness to the pins
+	}else if(current_minutes >= mode_end_minutes){
+		// Set the brightness to the pins
+	}
 }
 
 // Connects to the database
