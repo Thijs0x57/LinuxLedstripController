@@ -87,6 +87,11 @@ p
 	marging-left: 10px;
 }
 
+.sp-cancel
+{
+	visibility: hidden;
+}
+
 #main-title
 {
 	padding: 10px;
