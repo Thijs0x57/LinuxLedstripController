@@ -160,7 +160,7 @@ function hexToRgb() {
 }
 
 function SetColor(hex){
-	var sql = 'UPDATE currentState SET color = ' + hex;
+	var sql = 'UPDATE values SET color = ' + hex;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED HEX: ' + hex);
@@ -170,7 +170,7 @@ function SetColor(hex){
 }
 
 function SetBrightness(brightness){
-	var sql = 'UPDATE currentState SET brightness = ' + brightness;
+	var sql = 'UPDATE values SET brightness = ' + brightness;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED brightness: ' + brightness);
@@ -179,7 +179,7 @@ function SetBrightness(brightness){
 }
 
 function SetPattern(pattern){
-	var sql = 'UPDATE currentState SET pattern = ' + pattern;
+	var sql = 'UPDATE values SET pattern = ' + pattern;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED pattern: ' + pattern);
@@ -188,7 +188,7 @@ function SetPattern(pattern){
 }
 
 function SetModeTime(mode_start_time, mode_end_time){
-	var sql = 'UPDATE alternativeMode SET startTime = ' + mode_start_time + ', endTime = ' + mode_end_time;
+	var sql = 'UPDATE values SET startTime = ' + mode_start_time + ', endTime = ' + mode_end_time;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED mode_start_time: ' + mode_start_time);
@@ -199,7 +199,7 @@ function SetModeTime(mode_start_time, mode_end_time){
 }
 
 function SetModeBrightness(mode_brightness){
-	var sql = 'UPDATE alternativeMode SET brightness = ' + mode_brightness;
+	var sql = 'UPDATE values SET brightness = ' + mode_brightness;
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('Updated mode_brightness: ' + mode_brightness);
