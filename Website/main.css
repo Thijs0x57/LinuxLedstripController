@@ -84,12 +84,25 @@ p
 
 .footer p
 {
+	margin-top: 10px;
 	marging-left: 10px;
 }
 
 .sp-cancel
 {
 	visibility: hidden;
+}
+
+#modeTimeButton
+{
+	margin-bottom: 150px;
+}
+
+#endTimeModeInput,
+#startTimeModeInput
+{
+	margin-bottom: 10px;
+	width: 100px;
 }
 
 #main-title

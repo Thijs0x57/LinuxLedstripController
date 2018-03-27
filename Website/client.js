@@ -1,6 +1,9 @@
 
 window.onload = function () {
 
+    $("#startTimeModeInput").timepicker({ timeFormat: 'HH:mm' });
+    $("#endTimeModeInput").timepicker({ timeFormat: 'HH:mm' });
+
     getPatterns();
     getStatus();
 
@@ -125,6 +128,39 @@ $(function () {
             })
             .fail(function (msg) {
                 showError("#brightnessModeError", "Something went wrong, please try again.");
+            });
+        }
+    });
+
+    $("#modeTimeButton").click(function () {
+
+        var startTime = $("#startTimeModeInput").val();
+        var endTime = $("#endTimeModeInput").val();
+
+        if(startTime == "" || endTime == "")
+        {
+            showError("#timeModeError", "Please fill in both time fields before saving.");
+        }
+        else
+        {
+            var data = JSON.stringify({
+                "mode_start_time": startTime,
+                "mode_end_time": endTime
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "/mode/time",
+                contentType: "application/json",
+                data: data
+            })
+            .done(function () {
+                showSuccess("#timeModeError", "The time was successfully saved");
+                $("#start_time").text(startTime);
+                $("#end_time").text(endTime);
+            })
+            .fail(function (msg) {
+                showError("#timeModeError", "An error occurred. Please try again.");
             });
         }
     });

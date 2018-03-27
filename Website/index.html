@@ -8,6 +8,10 @@
         <script type="text/javascript" src="spectrum.js"></script>
         <script type="text/javascript" src="spectrum_code.js"></script>
 
+        <!--CSS and Javascript needed for the time picker-->
+        <link rel="stylesheet" type="text/css" href="jquery.timepicker.css">
+        <script type="text/javascript" src="jquery.timepicker.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="main.css">
 		<link rel="icon" type="image/png" href="favicon.png" sizes="256x256">
 		<title>RGB Controller</title>
@@ -61,6 +65,15 @@
 				<input type="text" name="brightnessModeInput">
 				<input type="submit" value="submit">
 			</form>
+
+            <h2>Change mode time</h2>
+            <p class="error" id="timeModeError">-</p>
+			<p>Time mode becomes active:</p>
+		    <input type="text" name="startTimeModeInput" id="startTimeModeInput">
+            <p>Time mode becomes inactive:</p>
+            <input type="text" name="endTimeModeInput" id="endTimeModeInput">
+
+            <br/><button id="modeTimeButton">Save time</button>
 		</div>
 
         <div class="footer">
