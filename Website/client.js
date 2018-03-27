@@ -36,6 +36,7 @@ $(function () {
         .done(function () {
             showSuccess("#colorError", "The color was successfully saved");
             $("#color").text(color);
+            $("#color").css("color", color);
         })
         .fail(function (msg) {
             showError("#colorError", "The color was not saved. Please try again.");
@@ -207,6 +208,8 @@ function getStatus()
     .done(function () {
 
         $("#color").text(result.color);
+        $("#color").css("color", result.color);
+
         $("#pattern").text(result.pattern);
         $("#brightness").text(result.brightness);
         $("#saving_brightness").text(result.mode_brightness);
