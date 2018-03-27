@@ -76,6 +76,12 @@ router.post('/mode/time', function (req, res) {
     res.status(204).send();
 });
 
+router.post('/pattern', function (req, res) {
+    var pattern = req.body.pattern;
+    console.log(pattern);
+    res.status(204).send();
+});
+
 // Express route for any other unrecognised incoming requests
 router.get('*', function (req, res) {
     console.log("The resource you are trying to send a GET request to does not exist or does not accept the request method.");
