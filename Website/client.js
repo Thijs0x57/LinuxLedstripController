@@ -1,24 +1,17 @@
 
 window.onload = function () {
 
-    $.getJSON("/patterns", function(result) {
+    getPatterns();
+    getStatus();
 
-        var $dropdown = $("#patternDropdown");
-
-        $.each(result.patterns, function (index, value) {
-            $dropdown.append($("<option />").val(value.name).text(value.display_name));
-        });
-    });
-
-    $.getJSON("/status", function (result) {
-
-        $("#color").text(result.color);
-        $("#pattern").text(result.pattern);
-        $("#brightness").text(result.brightness);
-        $("#saving_brightness").text(result.mode_brightness);
-        $("#start_time").text(result.mode_start_time);
-        $("#end_time").text(result.mode_end_time);
-    });
+    var interval = 1; //interval synchronisation in minutes;
+    var delay = (interval * 60) * 1000;
+    
+    let timerId = setTimeout(function tick() {
+        getStatus();
+        timerId = setTimeout(tick, delay);
+    }, delay);
+    
 };
 
 $(function () {
@@ -135,4 +128,29 @@ function showSuccess(elementName, message)
     setTimeout(function () {
         $(elementName).hide();
     }, 10000);
+}
+
+function getStatus()
+{
+    $.getJSON("/status", function (result) {
+
+        $("#color").text(result.color);
+        $("#pattern").text(result.pattern);
+        $("#brightness").text(result.brightness);
+        $("#saving_brightness").text(result.mode_brightness);
+        $("#start_time").text(result.mode_start_time);
+        $("#end_time").text(result.mode_end_time);
+    });
+}
+
+function getPatterns()
+{
+    $.getJSON("/patterns", function (result) {
+
+        var $dropdown = $("#patternDropdown");
+
+        $.each(result.patterns, function (index, value) {
+            $dropdown.append($("<option />").val(value.name).text(value.display_name));
+        });
+    });
 }
