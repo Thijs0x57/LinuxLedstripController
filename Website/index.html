@@ -1,0 +1,83 @@
+<!Doctype HTML>
+<html>
+	<head>
+        <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+
+        <!--CSS and Javascript needed for the spectrum colorpicker-->
+        <link rel="stylesheet" type="text/css" href="spectrum.css">
+        <script type="text/javascript" src="spectrum.js"></script>
+        <script type="text/javascript" src="spectrum_code.js"></script>
+
+        <!--CSS and Javascript needed for the time picker-->
+        <link rel="stylesheet" type="text/css" href="jquery.timepicker.css">
+        <script type="text/javascript" src="jquery.timepicker.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="icon" type="image/png" href="favicon.png" sizes="256x256">
+		<title>RGB Controller</title>
+        <script type="text/javascript" src="client.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+			<p>Menu</p>
+		</div>
+		
+		<div class="photoheader">
+		
+		</div>
+		
+		<h1 id="main-title">Main page</h1>
+		
+		<div class="main">
+			<h2>Status</h2>
+            <p class="error" id="statusError">-</p>
+			<span class="leftStatus">Colour: </span>                  <span class="rightStatus" id="color">-</span><br/>
+            <span class="leftStatus">Pattern: </span>                 <span class="rightStatus" id="pattern">-</span><br/>
+			<span class="leftStatus">Brightness: </span>              <span class="rightStatus" id="brightness">-</span><br/>
+            <span class="leftStatus">Power saving brightness: </span> <span class="rightStatus" id="saving_brightness">-</span><br/>
+ 			<span class="leftStatus">Power saving start time: </span> <span class="rightStatus" id="start_time">-</span><br/>
+			<span class="leftStatus">Power saving end time: </span>   <span class="rightStatus" id="end_time">-</span><br/>
+			
+			<h2>Change colour</h2>
+            <p class="error" id="colorError">-</p>
+            <input type='text' id="full"/>
+
+			<h2>Change pattern</h2>
+            <p class="error" id="patternError">-</p>
+            <form id="patternForm">
+				<select id="patternDropdown"></select>
+				<input type="submit" value="Save pattern">
+			</form>
+			
+			<h2>Change brightness</h2>
+            <p class="error" id="brightnessError">-</p>
+			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
+			<form id="brightnessForm">
+				<input type="text" name="brightnessInput">
+				<input type="submit" value="Save brightness">
+			</form>
+			
+			<h2>Change mode brightness</h2>
+            <p class="error" id="brightnessModeError">-</p>
+			<p>Brightness in percentage, 0 is off, 100 is fully bright.</p>
+			<form id="brightnessModeForm">
+				<input type="text" name="brightnessModeInput">
+				<input type="submit" value="Save brightness">
+			</form>
+
+            <h2>Change mode time</h2>
+            <p class="error" id="timeModeError">-</p>
+			<p>Time mode becomes active:</p>
+		    <input type="text" name="startTimeModeInput" id="startTimeModeInput">
+            <p>Time mode becomes inactive:</p>
+            <input type="text" name="endTimeModeInput" id="endTimeModeInput">
+
+            <br/><button id="modeTimeButton">Save time</button>
+		</div>
+
+        <div class="footer">
+            <p>This website was made by: Zwen Erkelens, Thijs Wijnen and Arthur van Strien.</p>
+        </div>
+	</body>
+</html>
