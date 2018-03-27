@@ -147,6 +147,26 @@ router.use(function(err, req, res, next) {
     }
 });
 
+function ReadDatabase(){
+	if(databaseError){
+		ConnectToDatabase();
+	}
+	if(!databaseError){
+		var sql = 'SELECT * FROM values';
+		con.query(sql, function (err, result) {
+			if (err){
+				databaseError = 1;
+			}
+			color = result[0].color;
+			brightness = result[0].brightness;
+			pattern = result[0].pattern;
+			mode_brightness = result[0].mode_brightness;
+			mode_start_time = result[0].mode_start_time;
+			mode_end_time = result[0].mode_end_time;
+		});
+	}
+}
+
 function SetCurrentColor() {
 	//Get the HEX value
 	var colorValue = hexToRgb();
@@ -301,6 +321,9 @@ function ConnectToDatabase(){
 }
 
 ConnectToDatabase();
+if(!databaseError){
+	ReadDatabase();
+}
 
 var rule = new schedule.RecurrenceRule();
 rule.minute = 5;
