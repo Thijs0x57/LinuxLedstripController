@@ -43,7 +43,9 @@ $(function () {
 
         var brightness = $("#brightnessForm").find('input[name="brightnessInput"]').val();
 
-        if (brightness > 100)
+        if (!$.isNumeric(brightness))
+            showError("#brightnessError", "The given value was not a number. Please give a number between 0 and 100.");
+        else if (brightness > 100)
             showError("#brightnessError", "The brightness cannot be higher than 100.");
         else if (brightness < 0)
             showError("#brightnessError", "The brightness cannot be lower than 0.");
