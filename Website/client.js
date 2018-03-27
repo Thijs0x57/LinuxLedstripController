@@ -5,11 +5,19 @@ window.onload = function () {
 
         var $dropdown = $("#patternDropdown");
 
-        console.log(result);
-
         $.each(result.patterns, function (index, value) {
             $dropdown.append($("<option />").val(value.name).text(value.display_name));
         });
+    });
+
+    $.getJSON("/status", function (result) {
+
+        $("#color").text(result.color);
+        $("#pattern").text(result.pattern);
+        $("#brightness").text(result.brightness);
+        $("#saving_brightness").text(result.mode_brightness);
+        $("#start_time").text(result.mode_start_time);
+        $("#end_time").text(result.mode_end_time);
     });
 };
 

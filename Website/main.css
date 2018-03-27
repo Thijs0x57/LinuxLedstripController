@@ -66,6 +66,12 @@ p
 	display: none;
 }
 
+.leftStatus
+{
+	width: 25%;
+	display: inline-block;
+}
+
 .footer
 {
 	padding: 10px;
