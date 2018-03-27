@@ -1,0 +1,1 @@
+sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
