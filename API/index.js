@@ -26,9 +26,9 @@ var con = mysql.createConnection({
   database: "mydb"					// Not ready yet
 });
 
-var RED_PIN = 1;
-var GREEN_PIN = 2;
-var BLUE_PIN = 3;
+var RED_PIN = 17;
+var GREEN_PIN = 27;
+var BLUE_PIN = 22;
 
 //include pigpio to interact with the GPIO
 var Gpio = require('pigpio').Gpio,
@@ -37,7 +37,7 @@ ledRed = new Gpio(RED_PIN, {mode: Gpio.OUTPUT}),
 //use GPIO pin 17 as output for GREEN
 ledGreen = new Gpio(GREEN_PIN, {mode: Gpio.OUTPUT}), 
 //use GPIO pin 27 as output for BLUE
-ledBlue = new Gpio(BLUE_PIN, {mode: Gpio.OUTPUT}), 
+ledBlue = new Gpio(BLUE_PIN, {mode: Gpio.OUTPUT})
 
 /*
 *Get request to get the status of the LED strip.
@@ -131,7 +131,7 @@ function SetCurrentColor() {
 	var colorValue = hexToRgb();
 
 	//for common cathode RGB LED 0 is fully off, and 255 is fully on
-	var redRGB = colorValue.r; 
+	var redRGB = colorValue.r;
 	var greenRGB = colorValue.g;
     var blueRGB = colorValue.b;
 
@@ -145,13 +145,7 @@ function SetCurrentColor() {
 
 // Function for converting hex color values to RGB values
 function hexToRgb() {
-    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    color = color.replace(shorthandRegex, function(m, r, g, b) {
-        return r + r + g + g + b + b;
-    });
-
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.color);
     return result ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
@@ -164,9 +158,9 @@ function SetColor(hex){
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED HEX: ' + hex);
-		this.color = hex;
-		SetCurrentColor();
 	});
+	this.color = hex;
+	SetCurrentColor();
 }
 
 function SetBrightness(brightness){
@@ -174,8 +168,8 @@ function SetBrightness(brightness){
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED brightness: ' + brightness);
-		this.brightness = brightness;
 	});
+	this.brightness = brightness;
 }
 
 function SetPattern(pattern){
@@ -183,8 +177,8 @@ function SetPattern(pattern){
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('UPDATED pattern: ' + pattern);
-		this.pattern = pattern;
 	});
+	this.pattern = pattern;
 }
 
 function SetModeTime(mode_start_time, mode_end_time){
@@ -193,9 +187,9 @@ function SetModeTime(mode_start_time, mode_end_time){
 		if (err) throw err;
 		console.log('UPDATED mode_start_time: ' + mode_start_time);
 		console.log('UPDATED mode_end_time: ' + mode_end_time);
-		this.mode_start_time = mode_start_time;
-		this.mode_end_time = mode_end_time;
 	});
+	this.mode_start_time = mode_start_time;
+	this.mode_end_time = mode_end_time;
 }
 
 function SetModeBrightness(mode_brightness){
@@ -203,8 +197,8 @@ function SetModeBrightness(mode_brightness){
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log('Updated mode_brightness: ' + mode_brightness);
-		this.mode_brightness = mode_brightness;
 	});
+	this.mode_brightness = mode_brightness;
 }
 
 function CheckAlternativeMode(){
