@@ -70,9 +70,36 @@ $(function () {
         }
     });
 
-    $("#brightnessModeInputForm").submit(function (event) {
-        alert("Pattern Form");
+    $("#brightnessModeForm").submit(function (event) {
         event.preventDefault();
+
+        var brightness = $("#brightnessModeForm").find('input[name="brightnessModeInput"]').val();
+
+        if(!$.isNumeric(brightness))
+            showError("#brightnessModeError", "The given value was not a number. Please give a number between 0 and 100.");
+        else if (brightness > 100)
+            showError("#brightnessModeError", "The brightness cannot be higher than 100.");
+        else if (brightness < 0)
+            showError("#brightnessModeError", "The brightness cannot be lower than 0.");
+        else {
+            var data = JSON.stringify({
+                "mode_brightness": brightness
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "/brightness/mode",
+                contentType: "application/json",
+                data: data
+            })
+            .done(function () {
+                showSuccess("#brightnessModeError", "The brightness was successfully saved");
+                $("#brightnessModeForm").find('input[name="brightnessModeInput"]').val("");
+            })
+            .fail(function (msg) {
+                showError("#brightnessModeError", "Something went wrong, please try again.");
+            });
+        }
     });
 });
 
