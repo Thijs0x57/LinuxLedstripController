@@ -3,8 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var port = 3000;
 
-var color               = 255;
-var brightness          = 255;
+var color               = "#4286f4";
+var brightness          = 100;
 var pattern             = "static";
 var mode_brightness     = 255;
 var mode_start_time     = "hh:mm";
