@@ -16,6 +16,29 @@ window.onload = function () {
 
 $(function () {
 
+    $("#colorPickerButton").click(function () {
+        
+        var color = $("#full").val();
+
+        var data = JSON.stringify({
+            "color": color
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/color",
+            contentType: "application/json",
+            data: data
+        })
+        .done(function () {
+            showSuccess("#colorError", "The color was successfully saved");
+            $("#color").text(color);
+        })
+        .fail(function (msg) {
+            showError("#colorError", "The color was not saved. Please try again.");
+        });
+    });
+
     $("#patternForm").submit(function (event) {
         event.preventDefault();
 
