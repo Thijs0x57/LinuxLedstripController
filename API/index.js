@@ -63,7 +63,6 @@ router.get('/patterns', function (req, res) {
     var json = JSON.stringify({
         "patterns": [
             { "name": "static", "display_name": "Static" },
-            { "name": "static_wave", "display_name": "Static rainbow" },
             { "name": "moving_wave", "display_name": "Moving rainbow" }
         ]
     });
