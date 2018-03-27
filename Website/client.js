@@ -16,8 +16,26 @@ window.onload = function () {
 $(function () {
 
     $("#patternForm").submit(function (event) {
-        alert("Pattern Form");
         event.preventDefault();
+
+        var pattern = $("#patternDropdown").val();
+        
+        var data = JSON.stringify({
+            "pattern": pattern 
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/pattern",
+            contentType: "application/json",
+            data: data
+        })
+        .done(function () {
+            alert("Success");
+        })
+        .fail(function (msg) {
+            alert(msg);
+        });
     });
 
     $("#brightnessForm").submit(function (event) {
