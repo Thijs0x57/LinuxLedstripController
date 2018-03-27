@@ -26,6 +26,19 @@ var con = mysql.createConnection({
   database: "mydb"					// Not ready yet
 });
 
+var RED_PIN = 1;
+var GREEN_PIN = 2;
+var BLUE_PIN = 3;
+
+//include pigpio to interact with the GPIO
+var Gpio = require('pigpio').Gpio,
+//use GPIO pin 4 as output for RED
+ledRed = new Gpio(RED_PIN, {mode: Gpio.OUTPUT}), 
+//use GPIO pin 17 as output for GREEN
+ledGreen = new Gpio(GREEN_PIN, {mode: Gpio.OUTPUT}), 
+//use GPIO pin 27 as output for BLUE
+ledBlue = new Gpio(BLUE_PIN, {mode: Gpio.OUTPUT}), 
+
 /*
 *Get request to get the status of the LED strip.
 *
@@ -152,6 +165,7 @@ function SetColor(hex){
 		if (err) throw err;
 		console.log('UPDATED HEX: ' + hex);
 		this.color = hex;
+		SetCurrentColor();
 	});
 }
 
