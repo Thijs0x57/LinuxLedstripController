@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var port = 3000;
 
-var color               = 255;
+var color               = "#ffffff";
 var brightness          = 100;
 var pattern             = "static";
 var mode_brightness     = 55;
@@ -131,9 +131,9 @@ function SetCurrentColor() {
 	var colorValue = hexToRgb();
 
 	//for common cathode RGB LED 0 is fully off, and 255 is fully on
-	var redRGB = colorValue.r * (brightness/100);
-	var greenRGB = colorValue.g * (brightness/100);
-    var blueRGB = colorValue.b * (brightness/100);
+	var redRGB = Math.round(colorValue.r * (brightness/100));
+	var greenRGB = Math.round(colorValue.g * (brightness/100));
+    var blueRGB = Math.round(colorValue.b * (brightness/100));
 
 	//set RED LED to specified value
 	ledRed.pwmWrite(redRGB);
@@ -162,7 +162,7 @@ function SetModeColor() {
 
 // Function for converting hex color values to RGB values
 function hexToRgb() {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.color);
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
     return result ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
@@ -217,7 +217,6 @@ function SetModeBrightness(mode_brightnessValue){
 		if (err) throw err;
 		console.log('Updated mode_brightness: ' + mode_brightness);
 	});
-	SetModeColor();
 }
 
 function CheckAlternativeMode(){
@@ -228,9 +227,9 @@ function CheckAlternativeMode(){
 	var mode_start_minutes = ((parseInt(mode_start_time.substring(0,2)) * 60) + parseInt(mode_start_time.substring(3,5)));
 	var mode_end_minutes = ((parseInt(mode_end_time.substring(0,2)) * 60) + parseInt(mode_end_time.substring(3,5)));
 	if(current_minutes >= mode_start_minutes){
-		// Set the mode_brightness to the pins
+		SetModeColor();
 	}else if(current_minutes >= mode_end_minutes){
-		// Set the brightness to the pins
+		SetCurrentColor();
 	}
 }
 
@@ -238,6 +237,13 @@ function CheckAlternativeMode(){
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
+});
+
+var rule = new schedule.RecurrenceRule();
+rule.minute = 5;
+ 
+var j = schedule.scheduleJob(rule, function(){
+	CheckAlternativeMode();
 });
 
 //Finally, start the server application, listening on the given port:
