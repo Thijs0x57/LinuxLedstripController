@@ -3,6 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var port = 3000;
 
+var schedule = require('node-schedule');
+
 var color               = "#4286f4";
 var brightness          = 100;
 var pattern             = "static";
@@ -35,11 +37,11 @@ var BLUE_PIN = 22;
 //include pigpio to interact with the GPIO
 var Gpio = require('pigpio').Gpio,
 //use GPIO pin 4 as output for RED
-ledRed = new Gpio(RED_PIN, {mode: Gpio.OUTPUT}), 
+ledRed = new Gpio(RED_PIN, {mode: Gpio.OUTPUT}),
 //use GPIO pin 17 as output for GREEN
-ledGreen = new Gpio(GREEN_PIN, {mode: Gpio.OUTPUT}), 
+ledGreen = new Gpio(GREEN_PIN, {mode: Gpio.OUTPUT}),
 //use GPIO pin 27 as output for BLUE
-ledBlue = new Gpio(BLUE_PIN, {mode: Gpio.OUTPUT})
+ledBlue = new Gpio(BLUE_PIN, {mode: Gpio.OUTPUT});
 
 /*
 *Get request to get the status of the LED strip.
@@ -241,6 +243,7 @@ function SetBrightness(brightnessValue){
 			}
 			console.log('UPDATED brightness: ' + brightness);
 		});
+	}
 	SetCurrentColor();
 }
 
